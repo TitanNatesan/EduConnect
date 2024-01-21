@@ -1,0 +1,26 @@
+# Student Login
+POST http://127.0.0.1:8000/api/student-login/
+Content-Type: application/json
+
+{
+  "username": "student_regno",  # Replace with a valid student registration number
+  "password": "student_password"  # Replace with the corresponding password
+}
+
+### Teacher Login
+POST http://127.0.0.1:8000/api/teacher-login/
+Content-Type: application/json
+
+{
+  "username": "teacherthree",  # Replace with a valid teacher registration number
+  "password": "1234567890"  # Replace with the corresponding password
+}
+
+### Obtain Token
+POST http://127.0.0.1:8000/api/token-auth/
+Content-Type: application/json
+
+{
+  "username": "student_or_teacher_regno",  # Replace with a valid username (student or teacher)
+  "password": "password", # Replace with the corresponding password
+}
