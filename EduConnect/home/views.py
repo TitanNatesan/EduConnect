@@ -2,11 +2,11 @@
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Teacher,Student,Branch,Department,Program,Video
+from .models import Student,Branch,Department,Program,Video
 from .serializers import DepartmentSerializer,ProgramSerial,VideoSerial
 import re
 
-@api_view(["POST"])
+@api_view(["POST"])                # {"username":"teacherthree","password":"1234567890"}
 def studLogin(request):          
     if request.method == "POST":
         data = request.data 
@@ -25,22 +25,22 @@ def studLogin(request):
             return Response("UserNotFound")
 
 
-@api_view(["POST"])      # {"username":"teacherthree","password":"1234567890"}
-def teachLogin(request):
-    if request.method == "POST":
-        data = request.data 
-        print(data)
-        username = data["username"]
-        password = data['password']
-        print(data)
-        try:
-            teach = Teacher.objects.get(regno=username)
-            if teach.password == password:
-                return Response("1")
-            else:
-                return Response("Invalid Password")
-        except Teacher.DoesNotExist:
-            return Response("UserNotFound")
+# @api_view(["POST"])      
+# def teachLogin(request):
+#     if request.method == "POST":
+#         data = request.data 
+#         print(data)
+#         username = data["username"]
+#         password = data['password']
+#         print(data)
+#         try:
+#             teach = Teacher.objects.get(regno=username)
+#             if teach.password == password:
+#                 return Response("1")
+#             else:
+#                 return Response("Invalid Password")
+#         except Teacher.DoesNotExist:
+#             return Response("UserNotFound")
 
 
 @api_view(['GET'])
@@ -91,67 +91,62 @@ def getProgram(request,dept,year):
         except Department.DoesNotExist:
             return Response("No Departments at this moment")
 
-@api_view(["POST"])
-def uploadVideo(request):
-    '''
+# @api_view(["POST"])
+# def uploadVideo(request):
+#     '''
    
-     {
-      "url": "https://example.com/video1",
-      "bid": 1,
-      "department_id": 1,
-      "uploaded_by": "teacherone",
-      "year": "1st-Year",
-      "program_id": 1
-    }
-    '''
+#      {
+#       "url": "https://example.com/video1",
+#       "bid": 1,
+#       "department_id": 1,
+#       "year": "1st-Year",
+#       "program_id": 1
+#     }
+#     '''
 
-    if request.method == "POST":
-        data = request.data
-        url = data['url']
+#     if request.method == "POST":
+#         data = request.data
+#         url = data['url']
 
-        def is_youtube_url(url):
-            youtube_regex = (
-                r'(https?://)?(www\.)?'
-                '(youtube|youtu|youtube-nocookie)\.(com|be)/'
-                '(watch\?v=|embed/|v/|.+\?v=)?([^&=%\?]{11})')
-            youtube_match = re.match(youtube_regex, url)
-            return youtube_match is not None
-        if not is_youtube_url(url=url):
-            return Response("Not a YouTube URL")
+#         def is_youtube_url(url):
+#             youtube_regex = (
+#                 r'(https?://)?(www\.)?'
+#                 '(youtube|youtu|youtube-nocookie)\.(com|be)/'
+#                 '(watch\?v=|embed/|v/|.+\?v=)?([^&=%\?]{11})')
+#             youtube_match = re.match(youtube_regex, url)
+#             return youtube_match is not None
+#         if not is_youtube_url(url=url):
+#             return Response("Not a YouTube URL")
         
-        url = url.split("/")[-1]
-        branch_id = data['bid']
-        dept_id = data['department_id']
-        uploadedBy = data['uploaded_by']
-        print(uploadedBy)
-        year = data['year']
-        program_id = data['program_id']
-        description = data['description']
-        try:
-            branch = Branch.objects.get(id=branch_id)
-            department = Department.objects.get(id=dept_id)
-            uploadedby = Teacher.objects.get(regno=uploadedBy)
-            program = Program.objects.get(id=program_id)
-            video = Video(
-                url = url,
-                branch = branch,
-                department=department,
-                uploaded_by=uploadedby,
-                year = year,
-                program = program,
-                description=description,
-            )
-            print(video.uploaded_by)
-            video.save()
-            return Response("Uploaded")
-        except Branch.DoesNotExist:
-            return Response("BranchNotExist")
-        except Department.DoesNotExist:
-            return Response("Department Don't Exist")
-        except Teacher.DoesNotExist:
-            return Response("UserNotFound")
-        except Program.DoesNotExist:
-            return Response("Program not Found at this moment")
+#         url = url.split("/")[-1]
+#         branch_id = data['bid']
+#         dept_id = data['department_id']
+#         year = data['year']
+#         program_id = data['program_id']
+#         description = data['description']
+#         try:
+#             branch = Branch.objects.get(id=branch_id)
+#             department = Department.objects.get(id=dept_id)
+#             program = Program.objects.get(id=program_id)
+#             video = Video(
+#                 url = url,
+#                 branch = branch,
+#                 department=department,
+#                 year = year,
+#                 program = program,
+#                 description=description,
+#             )
+#             print(video.uploaded_by)
+#             video.save()
+#             return Response("Uploaded")
+#         except Branch.DoesNotExist:
+#             return Response("BranchNotExist")
+#         except Department.DoesNotExist:
+#             return Response("Department Don't Exist")
+#         except Teacher.DoesNotExist:
+#             return Response("UserNotFound")
+#         except Program.DoesNotExist:
+#             return Response("Program not Found at this moment")
 
 @api_view(["GET"])
 def getVideo(request,dID,year,subID):

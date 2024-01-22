@@ -5,7 +5,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Branch(models.Model):
     branchName = models.CharField(max_length=50)
-    course_duration = models.IntegerField(validators=[MinValueValidator(limit_value=1, message="Course duration must be greater than or equal to 1."),MaxValueValidator(limit_value=5, message="Course duration must be less than or equal to 5."),],default=3)
+    course_duration = models.IntegerField(validators=[MinValueValidator(limit_value=1, message="Course duration must be greater than or equal to 1."),MaxValueValidator(limit_value=5, message="Course duration must be less than or equal to 5."),])
 
     def __str__(self) -> str:
         return f"{self.branchName}"
@@ -50,20 +50,10 @@ class Student(models.Model):
     def __str__(self) -> str:
         return f"{self.regno}, {self.department}"
 
-class Teacher(models.Model):
-    name = models.CharField(max_length=100)
-    regno = models.CharField(max_length=12,primary_key=True) 
-    password = models.CharField(max_length=200)
-    branch = models.ForeignKey(Branch,on_delete=models.PROTECT)
-
-    def __str__(self) -> str:
-        return f"{self.name}"
-
 class Video(models.Model):
     url = models.URLField()
     branch = models.ForeignKey(Branch,on_delete=models.PROTECT)
     department = models.ForeignKey(Department, on_delete=models.PROTECT)
-    uploaded_by = models.ForeignKey(Teacher,on_delete=models.PROTECT,null=True)
     opt = (
         ("1st-Year","1st-Year"),
         ("2nd-Year","2nd-Year"),
