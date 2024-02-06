@@ -1,80 +1,94 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useUser } from '../newContext';
-
+import { useUser } from "../newContext";
+import girl from "../assets/girl.jpg";
+import "../App.css";
 const StudentLogin = () => {
-  const [studentId, setStudentId] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const {userType,setUser}=useUser();
+  const [studentId, setStudentId] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const { userType, setUser } = useUser();
 
   const navigate = useNavigate();
 
   const defaultStudents = [
-    { id: 'student1', password: 'password1' },
-    { id: 'student2', password: 'password2' },
+    { id: "student1", password: "password1" },
+    { id: "student2", password: "password2" },
   ];
 
   const handleLogin = async () => {
-    try{
-    const response = await axios.post(`http://localhost:8000/api/studLogin/`, {
-      username: studentId,
-      password: password,
-    }, {
-      headers: {
-        'Content-Type': 'application/json',
+    try {
+      const response = await axios.post(
+        `http://localhost:8000/api/studLogin/`,
+        {
+          username: studentId,
+          password: password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.data === "1") {
+        setUser("student", studentId);
+        navigate("/fields");
+      } else {
+        setError(response.data);
       }
-    })
-    if (response.data=="1"){
-      setUser('student', studentId);
-      navigate("/fields")
-    }
-    else{
-      setError(response.data);
-    }
-  
-  }catch(error){
+    } catch (error) {
       setError(error);
     }
   };
 
   return (
-    <div className="bg-gradient-to-r from-teal-500 to-teal-600 h-screen flex flex-col justify-center items-center">
-      <div className="bg-white p-8 rounded-md shadow-md w-96">
-        <h2 className="text-3xl font-bold text-green-500 mb-6">Student Login</h2>
-        {error && <p style={{ color: 'red', marginTop: '1rem' }}>{error}</p>}
-        <div className="mb-4">
-          <label className="text-green-500 block">
-            Student ID:
-            <input
-              type="text"
-              value={studentId}
-              onChange={(e) => setStudentId(e.target.value)}
-              className="mt-1 p-2 block w-full border border-green-300 rounded-md focus:outline-none focus:border-green-500"
-            />
-          </label>
+    <>
+      <main className="flex bgclr overflow-hidden font-sans h-screen">
+        <div>
+          <img
+            src={girl}
+            alt="girl"
+            className=" hidden md:block h-screen rounded-r-3xl"
+          />
         </div>
-        <div className="mb-4">
-          <label className="text-green-500 block">
-            Password:
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 p-2 block w-full border border-green-300 rounded-md focus:outline-none focus:border-green-500"
-            />
-          </label>
+        <div className=" m-10">
+          <h1 className=" font-extrabold md:text-2xl text-5xl lg:text-3xl text-blue-600">
+            Login Your Account
+          </h1>
+          <div className="my-2 flex">
+            <label className="font-bold md:text-sm lg:text-xl">
+              Student ID
+              <input
+                type="text"
+                value={studentId}
+                onChange={(e) => setStudentId(e.target.value)}
+                placeholder="Your ID"
+                className="lg:px-4 md:px-2 md:py-1 py-3 px-3 w-3/4  lg:py-2 rounded-lg border-none outline-none mx-2 focus:ring focus:border-blue-300 bg-gray-200"
+              />
+            </label>
+          </div>
+          <div className="my-4">
+            <label className="font-bold lg:text-xl md:text-sm">
+              Password
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+                className="lg:px-4 md:px-2 md:py-1 py-3 px-3 w-3/4  lg:py-2 rounded-lg border-none outline-none mx-2 focus:ring focus:border-blue-300 bg-gray-200"
+              />
+            </label>
+          </div>
+          <button
+            onClick={handleLogin}
+            className="getstart px-7 py-2 rounded-none  md:px-7 md:py-1 md:text-sm lg:px-12 lg:py-3 lg:text-base md:rounded-full bg-gradient-to-r text-white font-semibold shadow-md transform hover:shadow-none transition-none hover:bg-opacity-80"
+          >
+            Login
+          </button>
         </div>
-        <button
-          onClick={handleLogin}
-          className="bg-green-500 text-white py-2 px-4 rounded-full text-lg font-semibold hover:bg-green-600 transition duration-300"
-        >
-          Login
-        </button>
-
-      </div>
-    </div>
+      </main>
+    </>
   );
 };
 

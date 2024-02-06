@@ -36,7 +36,9 @@ const StudentDashboard = () => {
   ];
 
   const openVideoInNewTab = (url) => {
+    url = url.split("/").pop();
     window.open(`https://www.youtube.com/embed/${url}`, '_blank');
+    console.log(`https://www.youtube.com/embed/${url}`);
   };
 
   return (

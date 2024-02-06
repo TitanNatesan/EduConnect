@@ -158,11 +158,14 @@ def getVideo(request,dID,year,subID):
             department = Department.objects.get(id=dID)
             program = Program.objects.get(id=subID)
             videos = Video.objects.filter(department=department,year=year,program=program)
+            for video in videos:
+                video.url = video.url.split("/")[-1]
             serial = VideoSerial(videos,many=True)
             return Response(serial.data)
         except Department.DoesNotExist:
             return Response("DepartmentNotFound")
         except Program.DoesNotExist:
             return Response("ProgramNotFound")
+        
         except Video.DoesNotExist:
             return Response("VideoNotFound")

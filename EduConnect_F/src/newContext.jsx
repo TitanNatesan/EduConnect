@@ -5,6 +5,7 @@ const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [userType, setUserType] = useState(null);
   const [userID, setUserID] = useState(null);
+  const [brannch,SetBranch]=useState()
 
 
   const setUser = (type, id) => {
@@ -12,8 +13,13 @@ export const UserProvider = ({ children }) => {
     setUserID(id);
   };
 
+  const setBrannch = (branchID) => {
+    SetBranch(branchID);
+  };
+
+
   return (
-    <UserContext.Provider value={{ userType, userID, setUser }}>
+    <UserContext.Provider value={{ userType, userID, setUser ,brannch,setBrannch}}>
       {children}
     </UserContext.Provider>
   );
