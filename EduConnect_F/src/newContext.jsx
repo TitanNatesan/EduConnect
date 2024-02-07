@@ -12,7 +12,7 @@ export const UserProvider = ({ children }) => {
     setUserType(type);
     setUserID(id);
   };
-
+ 
   const setBrannch = (branchID) => {
     SetBranch(branchID);
   };

@@ -8,6 +8,7 @@ import { useUser } from "../newContext";
 // import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import kahe from "../assets/kahe.png";
 import Footer from "../Footer";
+import meta from '../assets/metaverse.jpeg'
 const Fieldofstudy = () => {
   const [branches, setBranches] = useState([]);
 
@@ -15,10 +16,10 @@ const Fieldofstudy = () => {
 
   useEffect(() => {
     console.log(userType);
-    const fetchData = async () => {
+    const fetchData = async () => { 
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/getbranches/`
+          `http://localhost:8000/api/getfaculty/`
         );
         setBranches(response.data);
       } catch (error) {
@@ -37,6 +38,10 @@ const Fieldofstudy = () => {
           alt=""
           className="md:navImage lg:h-20 h-12 w-auto md:w-auto md:h-12"
         />
+        <img src={meta}
+          alt="kahe"
+          className="md:navImage lg:h-20 h-12 w-auto md:w-auto md:h-12"
+        />
         <img
           src={kahe}
           alt="kahe"
@@ -46,13 +51,13 @@ const Fieldofstudy = () => {
       <div className="bg-gradient-to-r from-teal-500 to-teal-600 h-screen flex flex-col justify-center items-center">
         <div className="text-white text-center">
           <h2 className="text-4xl text-green-800 font-extrabold mb-6 tracking-wide">
-            Choose a Branch of Study
+            Choose Faculty 
           </h2>
           <div className="grid gap-4">
             {branches.map((branch) => (
               <CourseCard
                 key={branch.id}
-                title={branch.branchName}
+                title={branch.facultyname}
                 linkTo={`/course/${branch.id}`}
                 onSelect={() => setBrannch(branch.id)}
               />

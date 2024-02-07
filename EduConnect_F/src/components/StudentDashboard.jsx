@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const StudentDashboard = () => {
-  const {proid,year,deptid}=useParams();
+  const {did,year,sid,tid}=useParams();
 
 
   const [videos, setVideos] = useState([]);
@@ -11,7 +11,7 @@ const StudentDashboard = () => {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/api/getvideo/${deptid}/${year}/${proid}/`);
+        const response = await axios.get(`http://127.0.0.1:8000/api/getvideo/${did}/${year}/${sid}/${tid}/`);
         setVideos(response.data);
       } catch (error) {
         console.error('Error fetching videos:', error);
@@ -34,7 +34,7 @@ const StudentDashboard = () => {
       videoUrl: 'pYBIpM5mBm4?si=A4TyruI2SLpmcgYt',
     },
   ];
-
+ 
   const openVideoInNewTab = (url) => {
     url = url.split("/").pop();
     window.open(`https://www.youtube.com/embed/${url}`, '_blank');

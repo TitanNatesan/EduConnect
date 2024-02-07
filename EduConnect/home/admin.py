@@ -1,12 +1,13 @@
 from django.contrib import admin
-from .models import Branch,Department,Program,Student,Video
+from .models import Faculty,Department,Subject,Student,Video,Topic
 # Register your models here.
-class BranchAdmin(admin.ModelAdmin):
+class FacultyAdmin(admin.ModelAdmin):
     list_display = [
-        "branchName",
+        "facultyname",
     ]
-admin.site.register(Branch,BranchAdmin)
+admin.site.register(Faculty,FacultyAdmin)
 admin.site.register(Department)
-admin.site.register(Program)
+admin.site.register(Subject)
+admin.site.register(Topic)
 admin.site.register(Student)
 admin.site.register(Video)

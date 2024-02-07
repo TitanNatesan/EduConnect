@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useUser } from '../newContext';
 import kahe from "../assets/kahe.png";
 import Footer from '../Footer';
+import meta from '../assets/metaverse.jpeg'
 const Subjects = () => {
 
   const { deptid, year } = useParams();
@@ -16,7 +17,7 @@ const Subjects = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/programs/${deptid}/${year}/`); // Replace 'your_api_endpoint' with your actual API endpoint
+        const response = await axios.get(`http://localhost:8000/api/subjects/${deptid}/${year}/`); // Replace 'your_api_endpoint' with your actual API endpoint
         setSubject(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -26,19 +27,7 @@ const Subjects = () => {
     fetchData();
   }, [deptid, year]);
 
-  const [topage, setToPage] = useState('');
   const { userType, userID } = useUser();
-
-  useEffect(
-    () => {
-      if (userType == "teacher") {
-        setToPage(`teacherdashboard`);
-      } else {
-        setToPage(`studentdashboard`);
-      }
-    }, []
-  );
-
 
   return (
     <>
@@ -48,11 +37,16 @@ const Subjects = () => {
           alt=""
           className="md:navImage lg:h-20 h-12 w-auto md:w-auto md:h-12"
         />
+        <img src={meta}
+          alt="kahe"
+          className="md:navImage lg:h-20 h-12 w-auto md:w-auto md:h-12"
+        />
         <img
           src={kahe}
           alt="kahe"
           className="md:navImage lg:h-20 h-12 w-auto md:w-auto md:h-12"
         />
+
       </nav>
       <div className="bg-gradient-to-r from-teal-500 to-teal-600 h-screen flex flex-col justify-center items-center">
         <div className="text-white text-center">
@@ -70,7 +64,7 @@ const Subjects = () => {
             {
               subject.map(
                 (sub) => (
-                  <CourseCard key={sub.id} title={sub.subject} linkTo={`/${topage}/${deptid}/${year}/${sub.id}`} />
+                  <CourseCard key={sub.id} title={sub.subject} linkTo={`/topics/${1}/${deptid}/${year}/${sub.id}`} />
                 )
               )
             }

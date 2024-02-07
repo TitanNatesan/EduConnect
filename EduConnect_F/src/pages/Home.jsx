@@ -27,12 +27,10 @@ const Home = () => {
         <main className="md:flex">
           <div className="mx-4 md:mx-20 my-20 md:my-10">
             <h1 className="font-extrabold sm:text-4xl md:text-4xl lg:text-5xl">
-              Tomorrow is for
-              <br /> the Taking
+              Catchup the Classes
             </h1>
             <p className="w-full md:w-1/2 my-7 lg:text-xl md:text-sm font-semibold text-slate-400">
-              Embark on a journey of rediscovery, deepening your understanding
-              through a self-driven quest for knowledge.
+              Your express ticket to knowledge revival! Unleash the thrill of catching up on missed sessions with our dynamic program designed for eager minds. Elevate your learning adventure and rediscover the joy of academic excellence!
             </p>
             <Link to="/loginstudent">
               <button className="getstart px-4 md:px-7 py-3 md:py-3 lg:my-5 rounded-3xl">

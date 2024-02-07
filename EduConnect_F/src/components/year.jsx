@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import { useUser } from '../newContext';
 import kahe from "../assets/kahe.png";
 import Footer from '../Footer';
-
+import meta from '../assets/metaverse.jpeg'
 const Yearofstudy = () => {
 
   const [branches, setBranches] = useState([]);
@@ -53,6 +53,10 @@ const Yearofstudy = () => {
           alt=""
           className="md:navImage lg:h-20 h-12 w-auto md:w-auto md:h-12"
         />
+        <img src={meta}
+          alt="kahe"
+          className="md:navImage lg:h-20 h-12 w-auto md:w-auto md:h-12"
+        />
         <img
           src={kahe}
           alt="kahe"
@@ -66,7 +70,7 @@ const Yearofstudy = () => {
               src={logo}
               alt="Logo"
               className="w-70 h-35 object-contain mb-8 rounded-full"
-            />
+            /> 
           </div>
           <h2 className="text-4xl text-green-800 font-extrabold mb-6 tracking-wide">
             Choose a Field of Study

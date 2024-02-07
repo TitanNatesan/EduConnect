@@ -6,7 +6,7 @@ const Footer = () => {
             <div className='container mx-auto flex items-center justify-between'>
                 <div>
                     <h1 className='text-xl font-bold'>Developed by</h1>
-                    <p className='text-sm'>Mukilan T, Lokesh P, Natesan K</p>
+                    <p className='text-sm'> <a href="https://natesanportfolio.netlify.app">Natesan K,</a> <a href="https://mukilan-portfolio.netlify.app">Mukilan T,</a> <a href="https://lokeshdev.co/">Lokesh P</a></p>
                 </div>
                 <div>
                     <p className='text-sm'>
