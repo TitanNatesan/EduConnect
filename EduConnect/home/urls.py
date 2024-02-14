@@ -1,13 +1,15 @@
 # urls.py
 
 from django.urls import path, include
-from . import views
+from . import views  
 
-urlpatterns = [ 
-    path("studLogin/",views.studLogin, name="student_login"),
-    path("getfaculty/",views.getFaculty, name="Get Faculties"),
-    path("getdept/<int:Fid>/",views.getDepartments, name="Get Departments"),
-    path("subjects/<int:dept>/<int:year>/",views.getSubject, name="Get Subjects"), #api/programs/1/1 
-    path("topics/<int:fid>/<int:did>/<int:year>/<int:sid>/",views.getTopics,name="Get Topics"),
-    path('getvideo/<int:dID>/<int:year>/<int:subID>/<int:tid>/',views.getVideo,name="get video"),
-]    
+urlpatterns = [
+    path("getfaculty/",views.getFaculty,name="Get Faculty"),
+    path("getdepartment/<int:fid>/",views.getDepart,name="Get Departments"),
+    path("getprogram/<int:fid>/<int:did>/",views.getProgram,name="Get Program"),
+    path('getsubject/<int:fid>/<int:did>/<int:pid>/<int:year>/',views.getSubject,name='Get Subjects'),
+    path("gettopic/<int:fid>/<int:did>/<int:pid>/<int:year>/<int:sid>/",views.getTopic,name="Get Topic"),
+    path("getvideo/<int:fid>/<int:did>/<int:pid>/<int:year>/<int:sid>/<int:tid>/",views.getvideo,name="Get Video"),
+    path("login/",views.Login,name='Login'),
+]
+ 
