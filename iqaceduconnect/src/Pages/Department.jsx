@@ -6,6 +6,7 @@ import Navbar from "../components/navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { UserProvider } from "../newContext";
 
 const Card = ({ name }) => {
   const {fid} = useParams();
@@ -37,10 +38,11 @@ const Fieldofstudy = () => {
   const { fid } = useParams();
   const [facultyNames, setFacultyName] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { BASE_URL } = UserProvider();
 
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:8000/api/getdepartment/${fid}/`)
+      .get(`${BASE_URL}/api/getdepartment/${fid}/`)
       .then((response) => {
         setFacultyName(response.data);
         setLoading(false);
@@ -49,7 +51,7 @@ const Fieldofstudy = () => {
         console.error("Error fetching data:", error);
         setLoading(false);
       });
-  }, []);
+  }, [BASE_URL]);
 
   return (
     <>

@@ -86,7 +86,7 @@ class Video(models.Model):
         return f"{self.url}" 
     
 
-class Student(models.Model):
+class Student(models.Model): 
     name = models.CharField(max_length=150)
     regno = models.CharField(max_length=12,primary_key=True) 
     password = models.CharField(max_length=200)

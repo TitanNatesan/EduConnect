@@ -6,6 +6,7 @@ export const UserProvider = ({ children }) => {
   const [userType, setUserType] = useState(null);
   const [userID, setUserID] = useState(null);
   const [brannch, SetBranch] = useState();
+  const BASE_URL = "http://192.168.131.132:8000";
 
   const setUser = (type, id) => {
     setUserType(type);
@@ -18,7 +19,7 @@ export const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ userType, userID, setUser, brannch, setBrannch }}
+      value={{ userType, userID, setUser, brannch, setBrannch, BASE_URL }}
     >
       {children}
     </UserContext.Provider>

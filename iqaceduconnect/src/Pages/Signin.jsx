@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../components/navbar";
 import Footer from "../components/Footer";
 import axios from "axios";
+import { UserProvider } from "../newContext";
 
 const Signin = () => {
     const navigate = useNavigate(); // Use useNavigate instead of useHistory
@@ -22,10 +23,12 @@ const Signin = () => {
         }
     }, [rememberPassword]);
 
+    const {BASE_URL}=UserProvider();
+
     const handleLogin = async () => {
         try {
             // Make a POST request to the API endpoint
-            const response = await axios.post('http://127.0.0.1:8000/api/login/', {
+            const response = await axios.post(`${BASE_URL}/api/login/`, {
                 username: username,
                 password: password,
             });

@@ -5,6 +5,8 @@ import Footer from "../components/Footer";
 import Navbar from "../components/navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { UserProvider } from "../newContext";
+
 
 const Card = ({ name }) => {
   const navigate = useNavigate();
@@ -28,9 +30,10 @@ const Card = ({ name }) => {
 const Faculty = () => {
   const [facultyNames, setFacultyName] = useState([]);
   const [loading, setLoading] = useState(true);
+  const {BASE_URL}= UserProvider();
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/getfaculty/")
+    axios.get(`${BASE_URL}/api/getfaculty/`) 
       .then(response => {
         setFacultyName(response.data);
         setLoading(false);
@@ -39,7 +42,7 @@ const Faculty = () => {
         console.error('Error fetching data:', error);
         setLoading(false);
       });
-  }, []);
+  }, [BASE_URL]);
 
   return (
     <>

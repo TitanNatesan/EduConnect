@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/navbar";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { UserProvider } from "../newContext";
 
 const Card = ({ name }) => {
   const { fid, did,pid, year } = useParams();
@@ -36,10 +37,11 @@ const Subject = () => {
   const { fid, did, pid, year } = useParams();
   const [facultyNames, setFacultyName] = useState([]);
   const [loading, setLoading] = useState(true);
+  const {BASE_URL}=UserProvider();
 
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:8000/api/getsubject/${fid}/${did}/${pid}/${year}/`)
+      .get(`${BASE_URL}/api/getsubject/${fid}/${did}/${pid}/${year}/`)
       .then((response) => {
         setFacultyName(response.data);
         setLoading(false);
@@ -48,7 +50,7 @@ const Subject = () => {
         console.error("Error fetching data:", error);
         setLoading(false);
       });
-  }, [fid, did]); // Include fid and did in the dependency array
+  }, [fid, did,BASE_URL]); // Include fid and did in the dependency array
 
   return (
     <>

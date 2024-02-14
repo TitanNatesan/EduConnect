@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { UserProvider } from "../newContext";
 
 const VideoPage = () => {
   const { fid, did, pid, year, sid, tid } = useParams();
 
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const {BASE_URL}= UserProvider();
 
   useEffect(() => {
     // Assuming your API response contains an array of video objects
     axios
-      .get(`http://127.0.0.1:8000/api/getvideo/${fid}/${did}/${pid}/${year}/${sid}/${tid}/`)
+      .get(`${BASE_URL}/api/getvideo/${fid}/${did}/${pid}/${year}/${sid}/${tid}/`)
       .then((response) => {
         setVideos(response.data);
         setLoading(false);
@@ -20,7 +22,7 @@ const VideoPage = () => {
         console.error("Error fetching data:", error);
         setLoading(false);
       });
-  }, [fid, did, pid, year, sid, tid]);
+  }, [fid, did, pid, year, sid, tid,BASE_URL]);
 
   const openVideoInNewTab = (url) => {
     url = url.split("/").pop();
