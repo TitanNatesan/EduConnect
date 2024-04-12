@@ -11,5 +11,7 @@ urlpatterns = [
     path("gettopic/<int:fid>/<int:did>/<int:pid>/<int:year>/<int:sid>/",views.getTopic,name="Get Topic"),
     path("getvideo/<int:fid>/<int:did>/<int:pid>/<int:year>/<int:sid>/<int:tid>/",views.getvideo,name="Get Video"),
     path("login/",views.Login,name='Login'),
+    path("comment/<str:un>/<str:vid>/",views.comment,name="comment"),
+    path('like/',views.likekaro,name='Like'),
 ]
  

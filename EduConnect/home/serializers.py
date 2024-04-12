@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Faculty,Department,Program,Subject,Video,Topic,Student
+from .models import Faculty,Department,Program,Subject,Video,Topic,Student,Comments
 
 
 class FacultySerializer(serializers.ModelSerializer):
@@ -36,3 +36,8 @@ class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
         fields = '__all__'
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comments
+        fields = ['id','student','comment','time']

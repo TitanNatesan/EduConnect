@@ -2,8 +2,8 @@
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Faculty,Department,Program,Subject,Topic,Video,Student
-from .serializers import FacultySerializer,DepartmentSerializer,ProgramSerializer,SubjectSerializer,TopicSerializer,VideoSerializer,StudentSerializer
+from .models import Faculty,Department,Program,Subject,Topic,Video,Student,Comments
+from .serializers import FacultySerializer,DepartmentSerializer,ProgramSerializer,SubjectSerializer,TopicSerializer,VideoSerializer,StudentSerializer,CommentSerializer
 import re
 
 
@@ -175,3 +175,79 @@ def Login(request):
                 return Response("Invalid Credentials")
         except Student.DoesNotExist:
             return Response("Student ID not found")
+
+
+@api_view(["GET","POST"])
+def comment(request,vid,un):
+    '''
+    {
+    "username":"22bebme057",
+    "video_id":2,
+    "comment":"Not BAD"
+    }
+    '''
+    if request.method=="GET":
+        user = Student.objects.get(regno=un)
+        video = Video.objects.get(id=vid)
+        seen = video.viewby.filter(regno=un).exists()
+        liked = True if video.like.filter(regno=un).exists() else False
+        if seen:
+            pass
+        else:
+            video.viewby.add(user)
+            print(video.view)
+
+
+
+        comment = Comments.objects.filter(video=video)
+        serial = CommentSerializer(comment,many=True)
+        video.url = video.url.split("/")[-1]
+
+        cont ={
+            'likes':len(video.like.all()),
+            'liked':liked,
+            'views': len(video.viewby.all()),
+            'urls':video.url,
+            'commment':serial.data
+        }
+        return Response(cont)
+    if request.method == "POST":
+        video = Video.objects.get(id=request.data['video_id'])
+        user = Student.objects.get(regno=request.data['username'])
+        comment = Comments(
+            video = video,
+            student = user,
+            comment = request.data['comment']
+        )
+        comment.save()
+        comments = Comments.objects.filter(video=video)
+        serial = CommentSerializer(comments,many=True)
+        video.url = video.url.strip("/")[-1]
+        print(video.url)
+        cont ={
+            'views': len(video.viewby.all()),
+            'urls':video.url,
+            'commment':serial.data
+        }
+        return Response(cont)
+        
+
+@api_view(['POST'])
+def likekaro(request):
+    '''
+    {
+    "username":"22bebme057",
+    "video_id":2
+    }
+    '''
+    if request.method == "POST":
+        user = Student.objects.get(regno=request.data['username'])
+        video = Video.objects.get(id=request.data['video_id'])
+        seen = video.like.filter(regno=request.data['username']).exists()
+        if seen:
+            video.like.remove(user)
+            return Response("Disliked")
+        else:
+            video.like.add(user)
+            return Response("Liked")
+        

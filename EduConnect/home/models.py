@@ -81,10 +81,11 @@ class Video(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.PROTECT)
     description = models.TextField()
     url = models.URLField()
-    
+    viewby = models.ManyToManyField('home.Student', related_name='videos_viewed')  
+    like = models.ManyToManyField('home.Student', related_name='videos_liked')  
     def __str__(self) -> str:
-        return f"{self.url}" 
-    
+        return f"{self.description}"  
+
 
 class Student(models.Model): 
     name = models.CharField(max_length=150)
@@ -104,3 +105,9 @@ class Student(models.Model):
 
     def __str__(self) -> str:
         return f"{self.regno}, {self.department}"
+    
+class Comments(models.Model):
+    video = models.ForeignKey(Video, on_delete=models.CASCADE)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    comment = models.TextField()
+    time = models.DateTimeField(auto_now_add=True,null=True)

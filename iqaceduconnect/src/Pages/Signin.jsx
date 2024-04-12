@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../components/navbar";
 import Footer from "../components/Footer";
 import axios from "axios";
-import { UserProvider } from "../newContext";
+import { useUser } from "../newContext";
 
 const Signin = () => {
     const navigate = useNavigate(); // Use useNavigate instead of useHistory
@@ -23,7 +23,7 @@ const Signin = () => {
         }
     }, [rememberPassword]);
 
-    const {BASE_URL}=UserProvider();
+    const {BASE_URL}=useUser();
 
     const handleLogin = async () => {
         try {

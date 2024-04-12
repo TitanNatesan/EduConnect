@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/navbar";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { UserProvider } from "../newContext";
+import { useUser } from "../newContext";
 
 const Card = ({ name }) => {
   const { fid, did, pid, year,sid } = useParams();
@@ -38,7 +38,7 @@ const Topics = () => {
   const { fid, did, pid, year,sid } = useParams();
   const [facultyNames, setFacultyName] = useState([]);
   const [loading, setLoading] = useState(true);
-  const {BASE_URL}=UserProvider();
+  const { BASE_URL } = useUser();
 
   useEffect(() => {
     axios
