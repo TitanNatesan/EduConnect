@@ -81,8 +81,8 @@ class Video(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.PROTECT)
     description = models.TextField()
     url = models.URLField()
-    viewby = models.ManyToManyField('home.Student', related_name='videos_viewed')  
-    like = models.ManyToManyField('home.Student', related_name='videos_liked')  
+    viewby = models.ManyToManyField('home.Student', related_name='videos_viewed',null=True,blank=True)  
+    like = models.ManyToManyField('home.Student', related_name='videos_liked',null=True,blank=True)  
     def __str__(self) -> str:
         return f"{self.description}"  
 
