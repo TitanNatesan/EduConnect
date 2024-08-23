@@ -8,10 +8,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useUser } from "../newContext";
 
 const Card = ({ name }) => {
-  const { fid, did, pid, year,sid } = useParams();
+  const { fid, did, pid, year, sid } = useParams();
   const navigate = useNavigate();
   const [tid, setTID] = useState();
-
 
   useEffect(() => {
     setTID(name.id);
@@ -20,7 +19,9 @@ const Card = ({ name }) => {
   return (
     <div
       className="max-w-md my-5 flex bg-white shadow-md mx-auto p-6 rounded-md items-center"
-      onClick={() => navigate(`/video/${fid}/${did}/${pid}/${year}/${sid}/${tid}`)}
+      onClick={() =>
+        navigate(`/video/${fid}/${did}/${pid}/${year}/${sid}/${tid}`)
+      }
     >
       <div>
         <h2 className="text-2xl text-left font-semibold text-gray-800 mb-2">
@@ -35,7 +36,7 @@ const Card = ({ name }) => {
 };
 
 const Topics = () => {
-  const { fid, did, pid, year,sid } = useParams();
+  const { fid, did, pid, year, sid } = useParams();
   const [facultyNames, setFacultyName] = useState([]);
   const [loading, setLoading] = useState(true);
   const { BASE_URL } = useUser();
@@ -51,7 +52,7 @@ const Topics = () => {
         console.error("Error fetching data:", error);
         setLoading(false);
       });
-  }, [fid, did,pid,sid,year,BASE_URL]); // Include fid and did in the dependency array
+  }, [fid, did, pid, sid, year, BASE_URL]); // Include fid and did in the dependency array
 
   return (
     <>
@@ -64,7 +65,7 @@ const Topics = () => {
           {loading ? (
             <p>Loading...</p>
           ) : (
-            <div style={{ overflowY: "auto", maxHeight: "400px" }}>
+            <div className="flex flex-wrap justify-evenly overflow-x-auto space-x-4 px-4">
               {facultyNames.map((facultyName) => (
                 <Card key={facultyName.id} name={facultyName} />
               ))}

@@ -6,7 +6,7 @@ export const UserProvider = ({ children }) => {
   const [userType, setUserType] = useState(null);
   const [userID, setUserID] = useState(null);
   const [brannch, SetBranch] = useState();
-  const BASE_URL = "http://127.0.0.1:8000";
+  const BASE_URL = "http://192.168.0.99:8000";
 
   const setUser = (type, id) => {
     setUserType(type);

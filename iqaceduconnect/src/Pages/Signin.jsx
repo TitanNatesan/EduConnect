@@ -53,7 +53,7 @@ const Signin = () => {
 
     return (
         <>
-            <div className="min-h-screen flex-col items-center justify-center bg-gray-100 overflow-y-hidden">
+            <div className="max-h-screen flex-col items-center justify-center bg-gray-100 overflow-y-hidden">
                 <Navbar />
                 <br />
                 <div className="flex justify-center">
