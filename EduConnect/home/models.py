@@ -111,3 +111,4 @@ class Comments(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     comment = models.TextField()
     time = models.DateTimeField(auto_now_add=True,null=True)
+    
