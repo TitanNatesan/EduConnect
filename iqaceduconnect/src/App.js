@@ -24,9 +24,15 @@ const App = () => {
           <Route path="/program/:fid/:did" element={<Program />} />
           <Route path="/year/:fid/:did/:pid/:year" element={<Year />} />
           <Route path="/subject/:fid/:did/:pid/:year" element={<Subject />} />
-          <Route path="/topics/:fid/:did/:pid/:year/:sid" element={<Topics />} />
-          <Route path="/video/:fid/:did/:pid/:year/:sid/:tid" element={<VideoPage />} /> 
-          <Route path='/embedyou/:uid' element={<YouTubeEmbed/>} />
+          <Route
+            path="/topics/:fid/:did/:pid/:year/:sid"
+            element={<Topics />}
+          />
+          <Route
+            path="/video/:fid/:did/:pid/:year/:sid/:tid"
+            element={<VideoPage />}
+          />
+          <Route path="/embedyou/:uid" element={<YouTubeEmbed />} />
         </Routes>
       </UserProvider>
     </Router>

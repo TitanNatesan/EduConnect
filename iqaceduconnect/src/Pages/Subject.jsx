@@ -6,27 +6,26 @@ import Navbar from "../components/navbar";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useUser } from "../newContext";
-
+import "../App.css";
 const Card = ({ name }) => {
-  const { fid, did,pid, year } = useParams();
+  const { fid, did, pid, year } = useParams();
   const navigate = useNavigate();
-  const [sid,setSID] = useState();
+  const [sid, setSID] = useState();
 
   useEffect(() => {
     setSID(name.id);
-  }, []);
+  }, [name.id]);
 
   return (
     <div
-      className="max-w-md my-5 flex bg-white shadow-md mx-auto p-6 rounded-md items-center"
-      onClick={() => navigate(`/topics/${fid}/${did}/${pid}/${year}/${sid}`)} 
+      className="flex-none w-64 m-2 bg-white shadow-md p-6 rounded-md items-center"
+      onClick={() => navigate(`/topics/${fid}/${did}/${pid}/${year}/${sid}`)}
+      style={{ cursor: "pointer" }}
     >
-      <div>
-        <h2 className="text-2xl text-left font-semibold text-gray-800 mb-2">
-          {name.subject}
-        </h2>
-      </div>
-      <div className="ml-auto">
+      <h2 className="text-xl text-left font-semibold text-gray-800 mb-2">
+        {name.subject}
+      </h2>
+      <div className="flex justify-end">
         <FontAwesomeIcon icon={faChevronRight} style={{ color: "#000" }} />
       </div>
     </div>
@@ -50,7 +49,7 @@ const Subject = () => {
         console.error("Error fetching data:", error);
         setLoading(false);
       });
-  }, [fid, did,BASE_URL]); // Include fid and did in the dependency array
+  }, [fid, did, pid, year, BASE_URL]);
 
   return (
     <>
@@ -63,7 +62,10 @@ const Subject = () => {
           {loading ? (
             <p>Loading...</p>
           ) : (
-            <div style={{ overflowY: "auto", maxHeight: "400px" }}>
+            <div
+              className="flex flex-wrap justify-evenly overflow-x-auto space-x-4 px-4"
+              style={{ maxHeight: "400px" }}
+            >
               {facultyNames.map((facultyName) => (
                 <Card key={facultyName.id} name={facultyName} />
               ))}
