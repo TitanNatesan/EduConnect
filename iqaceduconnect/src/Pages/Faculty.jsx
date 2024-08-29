@@ -20,7 +20,7 @@ const Card = ({ name }) => {
         <h2 className="text-2xl text-left font-semibold text-gray-800 mb-2">{name.facultyname}</h2>
       </div>
       <div className="ml-auto">
-        <FontAwesomeIcon icon={faChevronRight} style={{ color: "#000" }} />
+        
       </div>
     </div>
   );

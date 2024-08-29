@@ -13,5 +13,6 @@ urlpatterns = [
     path("login/",views.Login,name='Login'),
     path("comment/<str:un>/<str:vid>/",views.comment,name="comment"),
     path('like/',views.likekaro,name='Like'),
+    path("updateRun/",views.updateRunTime,name= "Update Run Time"),
+    path("getRunTime/",views.ViewRun,name="View Run time"),
 ]
- 

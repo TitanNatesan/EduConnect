@@ -27,7 +27,7 @@ const Card = ({ name }) => {
         </h2>
       </div>
       <div className="ml-auto">
-        <FontAwesomeIcon icon={faChevronRight} style={{ color: "#000" }} />
+        
       </div>
     </div>
   );
@@ -55,15 +55,15 @@ const Subject = () => {
   return (
     <>
       <Navbar />
-      <div className="h-screen bg-slate-500 flex flex-col justify-center items-center">
+      <div className="h-screen bg-slate-500 flex flex-col  items-center">
         <div className="text-white text-center">
-          <h2 className="text-4xl text-green-800 font-extrabold mb-6 tracking-wide">
+          <h2 className="text-4xl text-red-800 font-extrabold mb-6 tracking-wide">
             Choose Course
           </h2>
           {loading ? (
             <p>Loading...</p>
           ) : (
-            <div style={{ overflowY: "auto", maxHeight: "400px" }}>
+            <div style={{ overflowY: "auto", maxHeight: "400px" }} className="flex justify-evenly space-x-10">
               {facultyNames.map((facultyName) => (
                 <Card key={facultyName.id} name={facultyName} />
               ))}

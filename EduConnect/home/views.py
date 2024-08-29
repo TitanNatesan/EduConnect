@@ -1,11 +1,11 @@
 # views.py
-
+from django.db.models import Sum
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Faculty,Department,Program,Subject,Topic,Video,Student,Comments
-from .serializers import FacultySerializer,DepartmentSerializer,ProgramSerializer,SubjectSerializer,TopicSerializer,VideoSerializer,StudentSerializer,CommentSerializer
+from .models import Faculty,Department,Program,Subject,Topic,Video,Student,Comments,VideoRuntime
+from .serializers import FacultySerializer,DepartmentSerializer,ProgramSerializer,SubjectSerializer,TopicSerializer,VideoSerializer,StudentSerializer,CommentSerializer,VRSerial,VideoRuntimeSerializer
 import re
-
+from decimal import Decimal
 
 @api_view(['GET'])
 def getFaculty(request):
@@ -251,3 +251,66 @@ def likekaro(request):
             video.like.add(user)
             return Response("Liked")
         
+@api_view(['POST'])
+def updateRunTime(request):
+    """{
+        "video_id": 2,
+        "runTime": 3.2,
+        "student_id": "22becse049"
+        }"""
+    if request.method == "POST":
+        videoID = request.data.get('video_id')
+        runtime = request.data.get('runTime')
+        studentID = request.data.get("student_id")
+        
+        if not all([videoID, runtime, studentID]):
+            return Response({"error": "Missing required fields"}, status=400)
+        
+        try:
+            studentin = Student.objects.get(regno=studentID)
+            videoin = Video.objects.get(pk=videoID)
+        except Student.DoesNotExist:
+            return Response({"error": "Student not found"}, status=404)
+        except Video.DoesNotExist:
+            return Response({"error": "Video not found"}, status=404)
+        
+        runtime = Decimal(runtime)
+        
+        curVideo, created = VideoRuntime.objects.get_or_create(
+            video=videoin,
+            student=studentin,
+            defaults={"timerunned": Decimal('0.0')}
+        )
+        
+        curVideo.timerunned += runtime
+        
+        curVideo.save()
+        return Response({"message": "Success"})
+
+@api_view(["GET"])
+def ViewRun(request):
+    if request.method == "GET":
+        # Aggregate the total runtime for each video
+        video_runtime_data = VideoRuntime.objects.values('video').annotate(total_runtime=Sum('timerunned'))
+        
+        # Create a dictionary to hold total runtimes for each video
+        video_runtime_mapping = {video.id: 0 for video in Video.objects.all()}
+        
+        # Populate the dictionary with actual aggregated values
+        for runtime_data in video_runtime_data:
+            video_runtime_mapping[runtime_data['video']] = runtime_data['total_runtime'] or 0
+        
+        # Prepare the response data
+        response_data = []
+        vidobj = VideoRuntime.objects.all()
+        resvid = VRSerial(vidobj,many=True)
+        for video in Video.objects.all():
+            video_data = {
+                'video_id': video.id,
+                'description': video.description,
+                'total_runtime': float(video_runtime_mapping[video.id]),
+                "raw_data":resvid.data,
+            }
+            response_data.append(video_data)
+
+        return Response(response_data)

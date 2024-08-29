@@ -28,7 +28,7 @@ const Card = ({ name }) => {
         </h2>
       </div>
       <div className="ml-auto">
-        <FontAwesomeIcon icon={faChevronRight} style={{ color: "#000" }} />
+        
       </div>
     </div>
   );
@@ -64,7 +64,7 @@ const Fieldofstudy = () => {
           {loading ? (
             <p>Loading...</p>
           ) : (
-            <div style={{ overflowY: "auto", maxHeight: "400px" }}>
+            <div style={{ overflowY: "auto", maxHeight: "400px" }} className="flex justify-evenly space-x-10">
               {facultyNames.map((facultyName) => (
                 <Card key={facultyName.id} name={facultyName} />
               ))}

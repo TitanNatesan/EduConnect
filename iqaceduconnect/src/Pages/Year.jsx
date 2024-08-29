@@ -19,7 +19,7 @@ const Card = ({ programName, fid, did, year,pid }) => {
         </h2>
       </div>
       <div className="ml-auto">
-        <FontAwesomeIcon icon={faChevronRight} style={{ color: "#000" }} />
+        
       </div>
     </div>
   );

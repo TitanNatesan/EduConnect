@@ -112,3 +112,7 @@ class Comments(models.Model):
     comment = models.TextField()
     time = models.DateTimeField(auto_now_add=True,null=True)
     
+class VideoRuntime(models.Model):
+    student = models.ForeignKey("home.Student", on_delete=models.CASCADE)
+    video = models.ForeignKey("home.Video", on_delete=models.CASCADE)
+    timerunned = models.DecimalField(max_digits=6, decimal_places=2,default=0)

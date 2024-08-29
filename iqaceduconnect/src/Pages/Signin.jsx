@@ -43,7 +43,7 @@ const Signin = () => {
                 localStorage.setItem('savedProgram', userdata['program']);
                 localStorage.setItem('savedYear', userdata['year']);
                 const y = userdata['year'].charAt(0);
-
+                console.log(`/subject/${userdata['faculty']}/${userdata['department']}/${userdata['program']}/${y}`);
                 navigate(`/subject/${userdata['faculty']}/${userdata['department']}/${userdata['program']}/${y}`)
             }
         } catch (error) {

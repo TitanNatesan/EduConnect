@@ -11,6 +11,7 @@ import Year from "./Pages/Year";
 import Faculty from "./Pages/Faculty";
 import VideoPage from "./Pages/Videopage";
 import YouTubeEmbed from "./Pages/youtubeEmbed";
+import Analysis from "./Pages/Analysis";
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/topics/:fid/:did/:pid/:year/:sid" element={<Topics />} />
           <Route path="/video/:fid/:did/:pid/:year/:sid/:tid" element={<VideoPage />} /> 
           <Route path='/embedyou/:uid' element={<YouTubeEmbed/>} />
+          <Route path="/analysis" element={<Analysis />} />
         </Routes>
       </UserProvider>
     </Router>

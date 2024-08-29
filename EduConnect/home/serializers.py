@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Faculty,Department,Program,Subject,Video,Topic,Student,Comments
+from .models import Faculty,Department,Program,Subject,Video,Topic,Student,Comments,VideoRuntime
 
 
 class FacultySerializer(serializers.ModelSerializer):
@@ -41,3 +41,15 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comments
         fields = ['id','student','comment','time']
+        
+class VRSerial(serializers.ModelSerializer):
+    student = StudentSerializer()
+    video = VideoSerializer()
+    class Meta:
+        model = VideoRuntime
+        fields = "__all__"
+    
+class VideoRuntimeSerializer(serializers.Serializer):
+    video_id = serializers.IntegerField()
+    description = serializers.CharField()
+    total_runtime = serializers.FloatField()
