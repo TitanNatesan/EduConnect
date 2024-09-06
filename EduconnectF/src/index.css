@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* index.css or a similar global stylesheet */
+body {
+  font-family: 'Roboto', sans-serif;
+}
