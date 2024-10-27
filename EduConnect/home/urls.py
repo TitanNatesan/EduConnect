@@ -16,4 +16,4 @@ urlpatterns = [
     path("updateRun/",views.updateRunTime,name= "Update Run Time"),
     path("getRunTime/",views.ViewRun,name="View Run time"),
     path("newReq/",views.newResquest,name="updated request"),
-]
+] 

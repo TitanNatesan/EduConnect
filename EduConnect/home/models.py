@@ -40,7 +40,8 @@ class Subject(models.Model):
         ("5th-Year","5th-Year"),
     )
     year = models.CharField(choices=opt, max_length=50)
-    subject = models.CharField(max_length=200)
+    subject = models.CharField(max_length=200) 
+    img = models.ImageField( upload_to="SubjectImage/",null=True)
 
     def __str__(self) -> str:
         return f"{self.subject}, {self.department}"

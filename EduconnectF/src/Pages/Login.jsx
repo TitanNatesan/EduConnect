@@ -7,7 +7,7 @@ import ProfileCard from "../Components/ProfileCard";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState(""); 
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -19,7 +19,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post("http://192.168.50.179:8000/api/login/", {
+      const response = await axios.post("http://127.0.0.1:8000/api/login/", {
         username,
         password,
       });
@@ -104,20 +104,19 @@ const Login = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
-                    loading ? "opacity-50 cursor-not-allowed" : ""
-                  }`}
+                  className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${loading ? "opacity-50 cursor-not-allowed" : ""
+                    }`}
                 >
                   {loading ? "Logging in..." : "Login"}
                 </button>
               </div>
             </form>
-            <p className="text-sm text-center text-gray-600">
+            {/* <p className="text-sm text-center text-gray-600">
               Don't have an account?{" "}
               <a href="#" className="text-blue-600 hover:underline">
                 Sign up
               </a>
-            </p>
+            </p> */}
           </div>
         )}
       </div>

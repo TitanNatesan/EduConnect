@@ -373,15 +373,9 @@ def ViewRun(request):
 
 @api_view(['POST'])
 def newResquest(request):
-    try:
-        # Fetch the program based on the program ID
-        
+    try:        
         program = Program.objects.get(id=request.data['pro'])
-        
-        # Fetch the subjects related to the program and the specified year
         subjects = Subject.objects.filter(program=program, year=request.data['year'])
-        
-        # Serialize the subjects
         serialized_data = ASubjectSerializer(subjects, many=True).data
         
         return Response(serialized_data)

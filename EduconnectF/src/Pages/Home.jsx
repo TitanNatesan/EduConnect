@@ -21,11 +21,12 @@ const Home = () => {
       if (userdata) {
         try {
           const userDataObj = JSON.parse(userdata);
-          const response = await axios.post(`http://192.168.7.218:8000/api/newReq/`, {
+          const response = await axios.post(`http://127.0.0.1:8000/api/newReq/`, {
             pro: userDataObj.program.id,
             year: userDataObj.year,
           });
           console.log(JSON.stringify(response.data));
+
           setCourses(response.data);
         } catch (error) {
           console.log("Error fetching courses:", error);
@@ -70,9 +71,9 @@ const Home = () => {
                       courses.map((course, index) => (
                         <div key={index} onClick={() => (setTopics(course.topics),handleCourseClick(null))} className="p-4 hover:shadow-md transition-all rounded-xl bg-yellow-100">
                           <img
-                            src={`https://via.placeholder.com/190?text=Course+Image`}
+                            src={course.img?`http://127.0.0.1:8000/${course.img}`:`https://via.placeholder.com/190?text=Course+Image`}
                             alt="Course"
-                            className="mb-2 hover:scale-105 hover:cursor-pointer transition-all rounded-lg"
+                            className="mb-2 hover:scale-105 hover:cursor-pointer transition-all rounded-lg h-60"
                           />
                           <h3 className="font-bold text-center mb-2">{course.subject}</h3>
                         </div>
@@ -98,11 +99,11 @@ const Home = () => {
                       className="flex items-center justify-between bg-yellow-100 p-4 rounded-lg cursor-pointer"
                     >
                       <div className="flex items-center">
-                        <img
+                        {/* <img
                           src={`https://via.placeholder.com/50?text=Course+${index + 1}`}
                           alt="Course"
                           className="rounded-full mr-2"
-                        />
+                        /> */}
                         <span className="text-lg font-semibold">
                           {topic.topic}
                         </span>

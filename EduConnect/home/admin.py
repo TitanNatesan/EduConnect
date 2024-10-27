@@ -30,7 +30,8 @@ class AdminSubject(admin.ModelAdmin):
         'department',
         'program',
         'year',
-        'subject'
+        'subject',
+        "img"
     ]
 
 @admin.register(Video)

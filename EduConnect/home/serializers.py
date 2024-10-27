@@ -74,7 +74,7 @@ class ATopicSerializer(serializers.ModelSerializer):
     videos = AVideoSerializer(many=True, source='video_set')
 
     class Meta:
-        model = Topic
+        model = Topic 
         fields = ['topic', 'videos']
 
 
@@ -83,7 +83,7 @@ class ASubjectSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Subject
-        fields = ['subject', 'year', 'program', 'department', 'faculty', 'topics']
+        fields = ['subject', 'year', 'program', 'department', 'faculty', 'topics',"img"]
 
     def get_topics(self, obj):
         topics = Topic.objects.filter(subject=obj)
