@@ -99,11 +99,11 @@ const Home = () => {
                       className="flex items-center justify-between bg-yellow-100 p-4 rounded-lg cursor-pointer"
                     >
                       <div className="flex items-center">
-                        {/* <img
-                          src={`https://via.placeholder.com/50?text=Course+${index + 1}`}
+                        <img
+                          src={topic.img?`http://127.0.0.1:8000${topic.img}`:`https://via.placeholder.com/50?text=Course+${index + 1}`}
                           alt="Course"
-                          className="rounded-full mr-2"
-                        /> */}
+                          className="rounded-full mr-2 w-16 h-16"
+                        />
                         <span className="text-lg font-semibold">
                           {topic.topic}
                         </span>

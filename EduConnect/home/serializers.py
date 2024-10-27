@@ -75,7 +75,7 @@ class ATopicSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Topic 
-        fields = ['topic', 'videos']
+        fields = ['topic', 'videos',"img"]
 
 
 class ASubjectSerializer(serializers.ModelSerializer):

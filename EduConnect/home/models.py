@@ -61,6 +61,7 @@ class Topic(models.Model):
     year = models.CharField(choices=opt, max_length=50)
     subject = models.ForeignKey("home.Subject", on_delete=models.PROTECT)
     topic = models.CharField(max_length=100)
+    img = models.ImageField( upload_to="Topic/",null=True)
 
     def __str__(self) -> str:
         return f"{self.topic} | {self.department} | {self.faculty}"
